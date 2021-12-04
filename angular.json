@@ -1,12 +1,12 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "6fd32a4b-1e07-4c10-9472-192753e278df"
+    "analytics": "4992b2bd-8ce4-4141-9be3-c325c9e33744"
   },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "myApp": {
+    "angular-graph": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -30,9 +30,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -71,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "myApp:build:production"
+              "browserTarget": "angular-graph:build:production"
             },
             "development": {
-              "browserTarget": "myApp:build:development"
+              "browserTarget": "angular-graph:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -82,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "myApp:build"
+            "browserTarget": "angular-graph:build"
           }
         },
         "test": {
@@ -105,5 +109,5 @@
       }
     }
   },
-  "defaultProject": "myApp"
+  "defaultProject": "angular-graph"
 }
