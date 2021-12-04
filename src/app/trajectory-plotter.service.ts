@@ -12,7 +12,7 @@ export class TrajectoryPlotterService {
 
   getTrajectory(ballSpeedMph: number, launchAngle: number, spinRate: number) : Observable<Point[]> {
 
-    return this.http.get<Point[]>(`http://kallikarls-test.azurewebsites.net/api/trajectory?ballSpeed=${ballSpeedMph}&launchAngle=${launchAngle}&spinRate=${spinRate}`);
+    return this.http.get<Point[]>(`https://kallikarls-test.azurewebsites.net/api/trajectory?ballSpeed=${ballSpeedMph}&launchAngle=${launchAngle}&spinRate=${spinRate}`);
   }
 
 }
