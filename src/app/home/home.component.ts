@@ -15,8 +15,8 @@ export class HomeComponent implements AfterViewInit {
   private chartRef!: ElementRef;
   private chart!: Chart;
   private data: Point[] = [];
-  public shotLength: number = 0;
-  public shotHeight: number = 0;
+  public shotLength: string = "0";
+  public shotHeight: string = "0";
 
   ballLaunchInputForm = this.formBuilder.group({
     ballSpeedMph: '140',
@@ -43,14 +43,14 @@ export class HomeComponent implements AfterViewInit {
       .subscribe((response) => {
         console.log("Received path data");
         if (response.length > 0) {
-          this.shotLength = Math.round(response[response.length-1].x);
+          this.shotLength = response[response.length-1].x.toFixed(1);
           var maxY = -1;
           response.forEach(point => {
             if (point.y > maxY) {
               maxY = point.y;
             }
             this.data.push(point);
-            this.shotHeight = Math.round(maxY);
+            this.shotHeight = maxY.toFixed(1);
           });
         }        
         this.chart.update();
@@ -94,7 +94,7 @@ export class HomeComponent implements AfterViewInit {
         }
     }
     });
-    
+
     this.renderShot();
   }
   
