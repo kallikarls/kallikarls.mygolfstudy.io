@@ -1,3 +1,4 @@
+import { HttpResponseBase } from '@angular/common/http';
 import {AfterViewInit, Component, ElementRef, ViewChild} from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import {Chart, Point} from "chart.js";
@@ -10,9 +11,12 @@ import { TrajectoryPlotterService } from '../trajectory-plotter.service';
 })
 export class HomeComponent implements AfterViewInit {
   @ViewChild('chart')
+
   private chartRef!: ElementRef;
   private chart!: Chart;
   private data: Point[] = [];
+  public shotLength: number = 0;
+  public shotHeight: number = 0;
 
   ballLaunchInputForm = this.formBuilder.group({
     ballSpeedMph: '140',
@@ -23,6 +27,10 @@ export class HomeComponent implements AfterViewInit {
   constructor(private formBuilder: FormBuilder, private trajectoryPlotterService: TrajectoryPlotterService) { }
 
   onSubmit() : void {
+    this.renderShot();
+  }
+
+  renderShot() {
     // Apply input parameters
     //console.warn('BallData', this.ballLaunchInputForm.value);
     console.log('Ball data', this.ballLaunchInputForm.controls.ballSpeedMph);
@@ -34,23 +42,23 @@ export class HomeComponent implements AfterViewInit {
       Number(this.ballLaunchInputForm.controls.spinRate.value))
       .subscribe((response) => {
         console.log("Received path data");
-        response.forEach(x => this.data.push(x));
+        if (response.length > 0) {
+          this.shotLength = Math.round(response[response.length-1].x);
+          var maxY = -1;
+          response.forEach(point => {
+            if (point.y > maxY) {
+              maxY = point.y;
+            }
+            this.data.push(point);
+            this.shotHeight = Math.round(maxY);
+          });
+        }        
         this.chart.update();
-      });
-    
-    //.subscribe(result => result.forEach(x => this.data.push(x)));
-    
-    //this.trajectoryPlotterService.getTrajectory(
-    //  Number(this.ballLaunchInputForm.controls.ballSpeedMph),
-    //  Number(this.ballLaunchInputForm.controls.launchAngle),
-    //  Number(this.ballLaunchInputForm.controls.spinRate)
-    //).forEach(x => this.data.push(x));
-       
-    
-    
+      }); 
   }
 
   ngAfterViewInit() {
+    
     //this.data = [{x: 1, y: 20}, {x: 2, y: 15}, {x: 3, y: 10}, {x: 4, y: 12}, {x: 5, y: 6}];
     this.chart = new Chart(this.chartRef.nativeElement, {
       type: 'line',
@@ -86,5 +94,8 @@ export class HomeComponent implements AfterViewInit {
         }
     }
     });
+    
+    this.renderShot();
   }
+  
 }
