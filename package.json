@@ -9,7 +9,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "deploy:golfplotter": "ng deploy golfplotter"
+    "deploy:golfplotter": "nx deploy golfplotter"
   },
   "private": true,
   "dependencies": {
