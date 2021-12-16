@@ -1,0 +1,30 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@mgs/shared/data-access/trajectory": [
+        "libs/shared/data-access/trajectory/src/index.ts"
+      ],
+      "@mgs/trajectory/feature/shell": [
+        "libs/trajectory/feature/shell/src/index.ts"
+      ],
+      "@mgs/trajectory/feature/trajectory": [
+        "libs/trajectory/feature/trajectory/src/index.ts"
+      ]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
