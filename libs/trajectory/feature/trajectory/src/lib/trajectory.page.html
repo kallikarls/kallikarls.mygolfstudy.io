@@ -1,25 +1,51 @@
-<form [formGroup]="ballLaunchInputForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="ballSpeedMph"> Ball speed (mph): </label>
-    <input id="ballSpeedMph" type="number" formControlName="ballSpeedMph" />
-  </div>
+<div class="outerContainer">
+  <div fxLayout="row" fxLayoutGap="10px" class="container">
+    <form [formGroup]="ballLaunchInputForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="ballSpeedMph"> Ball speed: </label>
+        <mat-slider
+          formControlName="ballSpeedMph"
+          [min]="85"
+          [max]="220"
+          [thumbLabel]="true"
+          (change)="onSubmit()"
+        ></mat-slider>
+        {{ballLaunchInputForm.get('ballSpeedMph')?.value}} mph
+      </div>
 
-  <div>
-    <label for="launchAngle"> Launch angle °: </label>
-    <input id="launchAngle" type="number" formControlName="launchAngle" />
-  </div>
+      <div>
+        <label for="launchAngle"> Launch angle : </label>
+        <mat-slider
+          formControlName="launchAngle"
+          [min]="0"
+          [max]="30"
+          [thumbLabel]="true"
+          (change)="onSubmit()"
+        ></mat-slider>
+        {{ballLaunchInputForm.get('launchAngle')?.value}} °
+        <!--<input id="launchAngle" type="number" formControlName="launchAngle" />-->
+      </div>
 
-  <div>
-    <label for="spinRate"> Spin rate (rpm): </label>
-    <input id="spinRate" type="number" formControlName="spinRate" />
+      <div>
+        <label for="spinRate"> Spin rate (rpm): </label>
+        <!--<input id="spinRate" type="number" formControlName="spinRate" />-->
+        <mat-slider
+          formControlName="spinRate"
+          [min]="1000"
+          [max]="7000"
+          [step]="50"
+          [thumbLabel]="true"
+          (change)="onSubmit()"
+        ></mat-slider>
+        {{ballLaunchInputForm.get('spinRate')?.value}} (rpm)
+      </div>
+      <!--<button mat-flat-button color="primary" type="submit">Render shot</button>--><label>  Length (m): {{ shotLength }} - Apex (m): {{shotHeight}}</label>
+    </form>
   </div>
-  <button class="button" type="submit">Render shot</button>
-</form>
-
 <canvas
   baseChart
   [data]="lineChartData"
   [options]="lineChartOptions"
   [type]="lineChartType"
 ></canvas>
-<label>Length (m): {{ shotLength }} - Apex (m): {{shotHeight}}</label>
+</div>

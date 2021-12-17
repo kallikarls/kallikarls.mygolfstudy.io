@@ -75,6 +75,8 @@ export class TrajectoryPage implements OnDestroy {
   }
 
   renderShot() {
+    console.log(this.ballLaunchInputForm.value);
+
     this.trajectoryService
       .getTrajectory(
         this.ballLaunchInputForm.controls.ballSpeedMph.value,
