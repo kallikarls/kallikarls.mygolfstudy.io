@@ -74,6 +74,13 @@ export class TrajectoryPage implements OnDestroy {
     this.renderShot();
   }
 
+  setDefaults() {
+    console.log("Set defaults");
+    this.ballLaunchInputForm.controls.ballSpeedMph.setValue('140');
+    this.ballLaunchInputForm.controls.launchAngle.setValue("13");
+    this.ballLaunchInputForm.controls.spinRate.setValue("2200");
+  }
+
   renderShot() {
     console.log(this.ballLaunchInputForm.value);
 
