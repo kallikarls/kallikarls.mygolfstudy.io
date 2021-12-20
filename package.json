@@ -9,7 +9,8 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx test",
-    "deploy:golfplotter": "nx build golfplotter --output-path docs --base-href https://kallikarls.github.io/kallikarls.mygolfstudy.io/ && nx deploy golfplotter"
+    "predeploy:golfplotter": "nx build golfplotter --output-path docs --base-href https://kallikarls.github.io/kallikarls.mygolfstudy.io/",
+    "deploy:golfplotter": "nx deploy golfplotter"
   },
   "private": true,
   "dependencies": {
